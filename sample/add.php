@@ -14,33 +14,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 </head>
 <body  data-editor="ClassicEditor" data-collaboration="false" data-revision-history="false">
-	<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark nav_css" >
-		<a class="navbar-brand" href="#">BILOG</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-		  <span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNav">
-		  <ul class="navbar-nav">
-			<li class="nav-item active">
-			  <a class="nav-link" href="#">Home</span></a>
-			</li>
-			<li class="nav-item">
-			  <a class="nav-link" href="#">Features</a>
-			</li>
-			<li class="nav-item">
-			  <a class="nav-link" href="#">Pricing</a>
-			</li>
-			<div class="login-signup">
-			<li class="nav-item login">
-				<button type="submit" href="#">Login</button>
-			  </li>
-			  <li class="nav-item signup">
-				<button type="submit" href="#">Signup</button>
-			  </li>
-			</div>
-		  </ul>
-		</div>
-	  </nav> -->
 	  <div class="navbar">
         <div class="nav-logo">
             <img src="../static/logo_rect.png" alt="LOGO">
@@ -57,43 +30,41 @@
         </div>
     </div>
 	<div class="form_container">
-		<form>
+		<form method="POST" action="add.php">
 			<div class="form-group">
 			<label for="title">Title</label>
-			<input type="text" class="form-control" id="title"  placeholder="Enter the Title">
+			<input type="text" class="form-control" id="title"  name="title" placeholder="Enter the Title">
 			</div>
 			<br>
 			<div class="input-group mb-3">
 				<div class="custom-file">
-				<input type="file" class="custom-file-input" id="img1">
+				<input type="file" name="img" class="custom-file-input" id="img1">
 				</div>
 			</div>
 
 			<div class="input-group">
-				<select class="custom-select" id="category" aria-label="Example select with button addon">
+				<select class="custom-select" id="category" name="tag" aria-label="Example select with button addon">
 				<option selected>Choose your category</option>
 				<option value="1">One</option>
 				<option value="2">Two</option>
 				<option value="3">Three</option>
 				</select>
-				<div class="input-group-append">
-				<button class="btn btn-outline-secondary" type="button">Select</button>
-				</div>
+				
 			</div>
 			<br>
 			<main>
 				<div class="centered">
 					<div class="row row-editor">
 						<div class="editor-container">
-							<div class="editor">
+							<textarea class="editor" name="content" >
 								
-							</div>
+							</textarea>
 						</div>
 					</div>
 				</div>
 			</main>
 			<br>
-			<button type="submit" class="btn btn-dark">Submit</button>
+			<button type="submit" class="btn btn-dark" name="submit">Submit</button>
 		</form>
 	
 	</div>
@@ -166,6 +137,24 @@
 				} );
 		</script>
 
+<?php
+ if(isset($_POST['submit'])){
+    // Get editor content
+	$author="DK-2021";
+    $editorContent = $_POST['content'];
+    $title = $_POST['title'];
+    $tag = $_POST['tag'];
+    $filepath = "../static/" . $_FILES["img"]["name"];
 
+    if (move_uploaded_file($_FILES["img"]["tmp_name"], $filepath)) {
+        echo "Transfer done";
+    } else {
+        echo "Error !!";
+    }
+	$con = mysqli_connect('localhost','root','','lekhak');
+	$sql="insert into blog(title,img,tag,content,author) VALUES ('$title','$filepath','$tag','$editorContent', '$author')";
+	mysqli_query($con,$sql);
+ }
+?>
 </body>
 </html>

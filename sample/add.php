@@ -158,7 +158,7 @@
 		}
 
 		$con = mysqli_connect('localhost', 'root', '', 'lekhak');
-		$sql = "insert into blog(title,img,tag,content,author) VALUES ('$title','$uploadfile','$tag','$editorContent', '$author')";
+		$sql = "INSERT INTO `blog` (`id`, `title`, `img`, `tag`, `content`, `author`, `time`) VALUES (NULL, '$title', '$uploadfile', '$tag', '$editorContent', '$author', current_timestamp());";
 		mysqli_query($con, $sql);
 	}
 	?>

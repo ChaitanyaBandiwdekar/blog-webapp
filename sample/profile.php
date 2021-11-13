@@ -102,8 +102,9 @@ if (isset($_GET['delete'])) {
     }
     ?>
 
-
-    <div class="container my-4">
+    <br>
+    <h2 class="text-center">My Blogs</h2>
+    <div class="container border my-4" style="margin: auto; margin-top: 1%; margin-bottom: 2%; padding: 1.75%; border-radius: 2%">
 
         <table class="table" id="myTable">
             <thead>

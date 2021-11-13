@@ -50,22 +50,38 @@ if (isset($_GET['delete'])) {
 
 <body>
 
-    <div class="navbar">
-        <div class="nav-logo">
-            <img src="static/logo_rect.png" alt="LOGO">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="static/logo_rect.png" alt="" width="100">
+                </a>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blogs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">AboutUs</a>
+                    </li>
+                    <li class="nav-item px-1">
+                        <button class="btn btn-warning" type="submit">Login</button>
+                    </li>
+                    <li class="nav-item px-1">
+                        <button class="btn btn-outline-warning" type="submit">Signup</button>
+                    </li>
+                </ul>
+
+            </div>
         </div>
-        <div class="nav-links">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="blogs.html">Blogs</a></li>
-                <li><a href="aboutus.html">About Us</a></li>
-                <div class="accounts">
-                    <a href="login.html"><button type="button" class="btn btn-warning">Login</button></a>
-                    <a href="signup.html"><button type="button" class="btn btn-outline-warning">Signup</button></a>
-                </div>
-            </ul>
-        </div>
-    </div>
+    </nav>
 
     <?php
     if ($insert) {

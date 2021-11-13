@@ -16,19 +16,72 @@
 </head>
 
 <body data-editor="ClassicEditor" data-collaboration="false" data-revision-history="false">
-	<div class="navbar">
-		<div class="nav-logo">
-			<img src="static/logo_rect.png" alt="LOGO">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<div class="container">
+				<a class="navbar-brand" href="#">
+					<img src="static/logo_rect.png" alt="" width="100">
+				</a>
+			</div>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarText">
+				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="#">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Blogs</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">AboutUs</a>
+					</li>
+					<li class="nav-item px-1">
+						<button class="btn btn-warning" type="submit">Login</button>
+					</li>
+					<li class="nav-item px-1">
+						<button class="btn btn-outline-warning" type="submit">Signup</button>
+					</li>
+				</ul>
+
+			</div>
 		</div>
-		<div class="nav-links">
-			<ul>
-				<li><a href="index.html">Home</a></li>
-				<li><a href="blogs.html">Blogs</a></li>
-				<li><a href="aboutus.html">About Us</a></li>
-			</ul>
-		</div>
-	</div>
-	<div class="form_container">
+	</nav>
+
+
+	<?php
+	if (isset($_POST['submit'])) {
+		// Get editor content
+		$author = "DK-2021";
+		$editorContent = $_POST['content'];
+		$title = $_POST['title'];
+		$tag = $_POST['tag'];
+
+		$uploaddir = 'static/';
+		$uploadfile = $uploaddir . basename($_FILES['img']['name']);
+
+		if (move_uploaded_file($_FILES['img']['tmp_name'], $uploadfile)) {
+			echo "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">
+					<strong>Blog uploaded successfully!</strong> 
+					<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
+				</div>";
+		} else {
+			echo "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">
+					<strong>File upload failed! Please try again</strong> 
+					<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
+				</div>";
+		}
+
+		$con = mysqli_connect('localhost', 'root', '', 'lekhak');
+		$sql = "INSERT INTO `blog` (`id`, `title`, `img`, `tag`, `content`, `author`, `time`) VALUES (NULL, '$title', '$uploadfile', '$tag', '$editorContent', '$author', current_timestamp());";
+		mysqli_query($con, $sql);
+	}
+	?>
+
+	<br>
+	<h2 class="text-center">Add Blog</h2>
+	<div class="container border" style="margin: auto; margin-top: 1%; margin-bottom: 2%; padding: 1.75%; border-radius: 2%; width: 75%">
 		<form method="POST" action="add.php" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="title">Title</label>
@@ -46,10 +99,13 @@
 			<label for="tag">Category</label>
 			<div class="input-group">
 				<select class="custom-select" id="category" name="tag" aria-label="Example select with button addon">
-					<option selected>Choose your category</option>
-					<option value="1">One</option>
-					<option value="2">Two</option>
-					<option value="3">Three</option>
+					<option value="General" selected>General</option>
+					<option value="Cybersecurity">Cybersecurity</option>
+					<option value="Gaming">Gaming</option>
+					<option value="Finance">Finance</option>
+					<option value="Science">Science</option>
+					<option value="Arts">Arts</option>
+					<option value="Literature">Literature</option>
 				</select>
 
 			</div>
@@ -140,28 +196,6 @@
 			});
 	</script>
 
-	<?php
-	if (isset($_POST['submit'])) {
-		// Get editor content
-		$author = "DK-2021";
-		$editorContent = $_POST['content'];
-		$title = $_POST['title'];
-		$tag = $_POST['tag'];
-
-		$uploaddir = 'static/';
-		$uploadfile = $uploaddir . basename($_FILES['img']['name']);
-
-		if (move_uploaded_file($_FILES['img']['tmp_name'], $uploadfile)) {
-			echo "File is valid, and was successfully uploaded.\n";
-		} else {
-			echo "Upload failed";
-		}
-
-		$con = mysqli_connect('localhost', 'root', '', 'lekhak');
-		$sql = "INSERT INTO `blog` (`id`, `title`, `img`, `tag`, `content`, `author`, `time`) VALUES (NULL, '$title', '$uploadfile', '$tag', '$editorContent', '$author', current_timestamp());";
-		mysqli_query($con, $sql);
-	}
-	?>
 </body>
 
 </html>

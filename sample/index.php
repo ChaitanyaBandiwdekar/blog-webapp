@@ -21,7 +21,7 @@
 		<div class="container-fluid">
 			<div class="container">
 				<a class="navbar-brand" href="#">
-					<img src="static/logo_rect.png" alt="" width="100">
+					<img src="static/logo.png" alt="" width="100">
 				</a>
 			</div>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +30,7 @@
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="#">Home</a>
+						<a class="nav-link active" aria-current="page" href="index.php">Home</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#">Blogs</a>
@@ -39,10 +39,7 @@
 						<a class="nav-link" href="#">AboutUs</a>
 					</li>
 					<li class="nav-item px-1">
-						<button class="btn btn-warning" type="submit">Login</button>
-					</li>
-					<li class="nav-item px-1">
-						<button class="btn btn-outline-warning" type="submit">Signup</button>
+						<a href="login.php"><button class="btn btn-warning" type="submit">Login</button></a>
 					</li>
 				</ul>
 
@@ -65,7 +62,7 @@
 			// Create a connection
 			$conn = mysqli_connect($servername, $username, $password, $database);
 
-			$sql = "SELECT * FROM `blog`";
+			$sql = "SELECT * FROM `blog` ORDER BY `time` DESC";
 			$result = mysqli_query($conn, $sql);
 			$sno = 0;
 			while ($row = mysqli_fetch_assoc($result)) {
@@ -74,10 +71,10 @@
 						<div class=\"card h-100\" style=\"border-radius: 3%\">
 							<img src=\"" . $row['img'] . "\" class=\"card-img-top\" style=\"width: 100%; height: 15vw; object-fit: cover; border-radius: 3%\">
 							<div class=\"card-body\">
-								<h5 class=\"card-title\">" . $row['title'] . "</h5>
-								<p class=\"card-text\">content is a little bit longer.</p>
-								<span class=\"badge bg-secondary\">" . $row['tag'] . "</span>
-								<p class=\"card-text\"><small class=\"text-muted\">By " . $row['author'] . "</small>
+							<a href=\"blog.php?id=" . $row['id'] . "\" class=\"card-title fs-5 text-decoration-none stretched-link\" style=\"color: black;\">" . $row['title'] . "</a>
+							<br>
+							<span class=\"badge bg-secondary\">" . $row['tag'] . "</span>
+							<p class=\"card-text\"><small class=\"text-muted\">By " . $row['author'] . "</small>
 							</div>
 						</div>
 					</div>";

@@ -54,7 +54,7 @@ if (isset($_GET['delete'])) {
         <div class="container-fluid">
             <div class="container">
                 <a class="navbar-brand" href="#">
-                    <img src="static/logo_rect.png" alt="" width="100">
+                    <img src="static/logo.png" alt="" width="100">
                 </a>
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +63,7 @@ if (isset($_GET['delete'])) {
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Blogs</a>
@@ -72,16 +72,14 @@ if (isset($_GET['delete'])) {
                         <a class="nav-link" href="#">AboutUs</a>
                     </li>
                     <li class="nav-item px-1">
-                        <button class="btn btn-warning" type="submit">Login</button>
-                    </li>
-                    <li class="nav-item px-1">
-                        <button class="btn btn-outline-warning" type="submit">Signup</button>
+                        <a href="login.php"><button class="btn btn-warning" type="submit">Login</button></a>
                     </li>
                 </ul>
 
             </div>
         </div>
     </nav>
+
 
     <?php
     if ($insert) {

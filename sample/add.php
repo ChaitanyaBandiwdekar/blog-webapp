@@ -20,7 +20,7 @@
 		<div class="container-fluid">
 			<div class="container">
 				<a class="navbar-brand" href="#">
-					<img src="static/logo_rect.png" alt="" width="100">
+					<img src="static/logo.png" alt="" width="100">
 				</a>
 			</div>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,7 +29,7 @@
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="#">Home</a>
+						<a class="nav-link active" aria-current="page" href="index.php">Home</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#">Blogs</a>
@@ -38,16 +38,14 @@
 						<a class="nav-link" href="#">AboutUs</a>
 					</li>
 					<li class="nav-item px-1">
-						<button class="btn btn-warning" type="submit">Login</button>
-					</li>
-					<li class="nav-item px-1">
-						<button class="btn btn-outline-warning" type="submit">Signup</button>
+						<a href="login.php"><button class="btn btn-warning" type="submit">Login</button></a>
 					</li>
 				</ul>
 
 			</div>
 		</div>
 	</nav>
+
 
 
 	<?php
@@ -81,7 +79,7 @@
 
 	<br>
 	<h2 class="text-center">Add Blog</h2>
-	<div class="container border" style="margin: auto; margin-top: 1%; margin-bottom: 2%; padding: 1.75%; border-radius: 2%; width: 75%">
+	<div class="container border" style="margin: auto; margin-top: 1%; margin-bottom: 2%; padding: 1.75%; border-radius: 16px; width: 75%">
 		<form method="POST" action="add.php" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="title">Title</label>

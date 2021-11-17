@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" style="white-space: nowrap;">
         <div class="container-fluid">
             <div class="container">
                 <a class="navbar-brand" href="#">
@@ -26,17 +26,20 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item mx-2">
                         <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Blogs</a>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="add.php">Add a blog</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">AboutUs</a>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="#">About Us</a>
                     </li>
-                    <li class="nav-item px-1">
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="profile.php">Profile</a>
+                    </li>
+                    <li class="nav-item mx-2">
                         <a href="login.php"><button class="btn btn-warning" type="submit">Login</button></a>
                     </li>
                 </ul>

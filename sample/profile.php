@@ -50,7 +50,7 @@ if (isset($_GET['delete'])) {
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" style="white-space: nowrap;">
         <div class="container-fluid">
             <div class="container">
                 <a class="navbar-brand" href="#">
@@ -61,17 +61,20 @@ if (isset($_GET['delete'])) {
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item mx-2">
                         <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Blogs</a>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="add.php">Add a blog</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">AboutUs</a>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="#">About Us</a>
                     </li>
-                    <li class="nav-item px-1">
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="profile.php">Profile</a>
+                    </li>
+                    <li class="nav-item mx-2">
                         <a href="login.php"><button class="btn btn-warning" type="submit">Login</button></a>
                     </li>
                 </ul>
@@ -110,20 +113,26 @@ if (isset($_GET['delete'])) {
                     <th scope="col">S.No</th>
                     <th scope="col">Title</th>
                     <th scope="col">Tag</th>
+                    <th scope="col">Uploaded on</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $sql = "SELECT * FROM `blog`";
+                $sql = "SELECT * FROM `blog` ORDER BY `time` DESC";
                 $result = mysqli_query($conn, $sql);
                 $sno = 0;
+
+
                 while ($row = mysqli_fetch_assoc($result)) {
+                    $timestamp = strtotime($row['time']);
+                    $date = date('M d, Y', $timestamp);
                     $sno = $sno + 1;
                     echo "<tr>
                             <th scope='row'>" . $sno . "</th>
                             <td>" . $row['title'] . "</td>
                             <td>" . $row['tag'] . "</td>
+                            <td>" . $date . "</td>
                             <td> <button class='delete btn btn-sm btn-danger' id=d" . $row['id'] . "> <i class=\"fa-solid fa-trash\"></i> Delete</button>  </td>
                         </tr>";
                 }

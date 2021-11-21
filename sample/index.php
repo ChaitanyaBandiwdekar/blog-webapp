@@ -28,22 +28,41 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarText">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<ul class="navbar-nav mx-auto mb-2 mb-lg-0">
 					<li class="nav-item mx-2">
 						<a class="nav-link active" aria-current="page" href="index.php">Home</a>
 					</li>
 					<li class="nav-item mx-2">
-						<a class="nav-link" href="add.php">Add a blog</a>
-					</li>
-					<li class="nav-item mx-2">
 						<a class="nav-link" href="#">About Us</a>
 					</li>
-					<li class="nav-item mx-2">
-						<a class="nav-link" href="profile.php">Profile</a>
-					</li>
-					<li class="nav-item mx-2">
-						<a href="login.php"><button class="btn btn-warning" type="submit">Login</button></a>
-					</li>
+					<?php
+
+					session_start();
+
+					if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+						echo "<li class=\"nav-item mx-2\">
+									<a href=\"login.php\"><button class=\"btn btn-warning\" type=\"submit\">Login</button></a>
+								</li>
+								<li class=\"nav-item mx-2\">
+									<a href=\"signup.php\"><button class=\"btn btn-outline-warning\" type=\"submit\">Signup</button></a>
+								</li>
+								";
+					} else {
+						echo "<li class=\"nav-item mx-2\">
+								<a class=\"nav-link\" href=\"add.php\">Add a blog</a>
+							</li>
+
+							<li class=\"nav-item mx-2\">
+								<a class=\"nav-link\" href=\"profile.php\">Profile</a>
+							</li>
+							<li class=\"nav-item mx-2\">
+								<a href=\"logout.php\"><button class=\"btn btn-warning\" type=\"submit\">Logout</button></a>
+							</li>
+							";
+					}
+					?>
+
+
 				</ul>
 
 			</div>
@@ -53,7 +72,7 @@
 
 	<br>
 	<h2 class="text-center">Latest Blogs</h2>
-	<div class="container border" style="margin: auto; margin-top: 1%; margin-bottom: 2%; padding: 1.75%; border-radius: 2%">
+	<div class="container border" style="margin: auto; margin-top: 1%; margin-bottom: 2%; padding: 1.75%; border-radius: 16px">
 		<div class="row row-cols-1 row-cols-md-3 g-4">
 
 			<?php
@@ -72,7 +91,7 @@
 				$sno = $sno + 1;
 				echo "<div class=\"col\">
 						<div class=\"card h-100\" style=\"border-radius: 3%\">
-							<img src=\"" . $row['img'] . "\" class=\"card-img-top\" style=\"width: 100%; height: 15vw; object-fit: cover; border-radius: 3%\">
+							<img src=\"" . $row['img'] . "\" class=\"card-img-top\" style=\"width: 100%; height: 15vw; object-fit: cover; border-radius: 8px\">
 							<div class=\"card-body\">
 							<a href=\"blog.php?id=" . $row['id'] . "\" class=\"card-title fs-5 text-decoration-none stretched-link\" style=\"color: black;\">" . $row['title'] . "</a>
 							<br>

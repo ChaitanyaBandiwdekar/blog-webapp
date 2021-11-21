@@ -1,4 +1,11 @@
 <?php
+
+session_start();
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("location: login.php");
+}
+
 // INSERT INTO `blog` (`id`, `title`, `img`, `tag`, `content`, `author`, `time`) VALUES (NULL, 'is', 'sdassad', 'gaming', 'adsadsadasd', 'sadsa', current_timestamp());
 $insert = false;
 $update = false;
@@ -66,17 +73,36 @@ if (isset($_GET['delete'])) {
                         <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link" href="add.php">Add a blog</a>
-                    </li>
-                    <li class="nav-item mx-2">
                         <a class="nav-link" href="#">About Us</a>
                     </li>
-                    <li class="nav-item mx-2">
-                        <a class="nav-link" href="profile.php">Profile</a>
-                    </li>
-                    <li class="nav-item mx-2">
-                        <a href="login.php"><button class="btn btn-warning" type="submit">Login</button></a>
-                    </li>
+                    <?php
+
+
+
+                    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+                        echo "<li class=\"nav-item mx-2\">
+									<a href=\"login.php\"><button class=\"btn btn-warning\" type=\"submit\">Login</button></a>
+								</li>
+								<li class=\"nav-item mx-2\">
+									<a href=\"signup.php\"><button class=\"btn btn-outline-warning\" type=\"submit\">Signup</button></a>
+								</li>
+								";
+                    } else {
+                        echo "<li class=\"nav-item mx-2\">
+						<a class=\"nav-link\" href=\"add.php\">Add a blog</a>
+					</li>
+
+					<li class=\"nav-item mx-2\">
+						<a class=\"nav-link\" href=\"profile.php\">Profile</a>
+					</li>
+					<li class=\"nav-item mx-2\">
+						<a href=\"logout.php\"><button class=\"btn btn-warning\" type=\"submit\">Logout</button></a>
+					</li>
+					";
+                    }
+                    ?>
+
+
                 </ul>
 
             </div>
@@ -119,7 +145,8 @@ if (isset($_GET['delete'])) {
             </thead>
             <tbody>
                 <?php
-                $sql = "SELECT * FROM `blog` ORDER BY `time` DESC";
+                $user = $_SESSION["uname"];
+                $sql = "SELECT * FROM `blog` WHERE author = \"$user\" ORDER BY `time` DESC";
                 $result = mysqli_query($conn, $sql);
                 $sno = 0;
 

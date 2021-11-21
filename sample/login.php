@@ -1,3 +1,57 @@
+<?php
+
+// check if the user is already logged in
+if (isset($_SESSION['uname'])) {
+    header("location: profile.php");
+    exit;
+}
+require_once "config.php";
+
+$username = $password = "";
+$err = "";
+
+// if request method is post
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    if (empty(trim($_POST['uname'])) || empty(trim($_POST['password']))) {
+        $err = "Please enter username + password";
+    } else {
+        $username = trim($_POST['uname']);
+        $password = trim($_POST['password']);
+    }
+
+
+    if (empty($err)) {
+        $sql = "SELECT id, uname, `password` FROM user WHERE uname = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, "s", $param_username);
+        $param_username = $username;
+
+
+        // Try to execute this statement
+        if (mysqli_stmt_execute($stmt)) {
+            mysqli_stmt_store_result($stmt);
+            if (mysqli_stmt_num_rows($stmt) == 1) {
+                mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password);
+                if (mysqli_stmt_fetch($stmt)) {
+                    if (password_verify($password, $hashed_password)) {
+                        // this means the password is corrct. Allow user to login
+                        session_start();
+                        $_SESSION["uname"] = $username;
+                        $_SESSION["id"] = $id;
+                        $_SESSION["loggedin"] = true;
+
+                        //Redirect user to welcome page
+                        header("location: profile.php");
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,14 +59,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup</title>
+    <title>Login</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="add.css" />
+
+
 
 </head>
 
@@ -32,67 +86,62 @@
                     <li class="nav-item mx-2">
                         <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>
-                    <li class="nav-item mx-2">
-                        <a class="nav-link" href="add.php">Add a blog</a>
-                    </li>
+
                     <li class="nav-item mx-2">
                         <a class="nav-link" href="#">About Us</a>
                     </li>
-                    <li class="nav-item mx-2">
-                        <a class="nav-link" href="profile.php">Profile</a>
-                    </li>
-                    <li class="nav-item mx-2">
-                        <a href="login.php"><button class="btn btn-warning" type="submit">Login</button></a>
-                    </li>
+                    <?php
+
+                    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+                        echo "<li class=\"nav-item mx-2\">
+									<a href=\"login.php\"><button class=\"btn btn-warning\" type=\"submit\">Login</button></a>
+								</li>
+								<li class=\"nav-item mx-2\">
+									<a href=\"signup.php\"><button class=\"btn btn-outline-warning\" type=\"submit\">Signup</button></a>
+								</li>
+								";
+                    } else {
+                        echo "<li class=\"nav-item mx-2\">
+						<a class=\"nav-link\" href=\"add.php\">Add a blog</a>
+					</li>
+
+					<li class=\"nav-item mx-2\">
+						<a class=\"nav-link\" href=\"profile.php\">Profile</a>
+					</li>
+					<li class=\"nav-item mx-2\">
+						<a href=\"logout.php\"><button class=\"btn btn-warning\" type=\"submit\">Logout</button></a>
+					</li>
+					";
+                    }
+                    ?>
                 </ul>
 
             </div>
         </div>
     </nav>
 
-    <section>
-        <div class="container-form">
-            <div class="user signinBx">
-                <div class="imgBx"><img src="accounts1.png" alt="" /></div>
-                <div class="formBx">
-                    <form action="" onsubmit="return false;">
-                        <h2>Sign In</h2>
-                        <input type="text" name="" placeholder="Username" />
-                        <input type="password" name="" placeholder="Password" />
-                        <input type="submit" name="" value="Login" />
-                        <p class="signup">
-                            Don't have an account ?
-                            <a href="#" onclick="toggleForm();">Sign Up.</a>
-                        </p>
-                    </form>
-                </div>
+    <div class="container border" style="margin: auto; margin-top: 5%; margin-bottom: 2%; padding: 1.75%; border-radius: 16px; width: 40%">
+        <h2 class="text-center">Login</h2>
+        <form method="POST" action="login.php">
+            <div class="form-group">
+                <label for="title">Username</label>
+                <input type="text" class="form-control" id="uname" name="uname" placeholder="Enter username">
             </div>
-            <div class="user signupBx">
-                <div class="formBx">
-                    <form action="" onsubmit="return false;">
-                        <h2>Create an account</h2>
-                        <input type="text" name="" placeholder="Username" />
-                        <input type="email" name="" placeholder="Email Address" />
-                        <input type="password" name="" placeholder="Create Password" />
-                        <input type="password" name="" placeholder="Confirm Password" />
-                        <input type="submit" name="" value="Sign Up" />
-                        <p class="signup">
-                            Already have an account ?
-                            <a href="#" onclick="toggleForm();">Sign in.</a>
-                        </p>
-                    </form>
-                </div>
-                <div class="imgBx"><img src="accounts2.png" alt="" /></div>
+            <br>
+            <div class="form-group">
+                <label for="title">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
             </div>
-        </div>
-    </section>
 
-    <script>
-        const toggleForm = () => {
-            const container = document.querySelector('.container-form');
-            container.classList.toggle('active');
-        };
-    </script>
+            <br>
+            <br>
+            <button type="submit" class="btn btn-outline-success" name="login">Login</button>
+        </form>
+
+    </div>
+
+
+
 </body>
 
 </html>

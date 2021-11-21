@@ -27,22 +27,41 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarText">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 					<li class="nav-item mx-2">
 						<a class="nav-link active" aria-current="page" href="index.php">Home</a>
 					</li>
 					<li class="nav-item mx-2">
-						<a class="nav-link" href="add.php">Add a blog</a>
-					</li>
-					<li class="nav-item mx-2">
 						<a class="nav-link" href="#">About Us</a>
 					</li>
-					<li class="nav-item mx-2">
-						<a class="nav-link" href="profile.php">Profile</a>
+					<?php
+
+					session_start();
+
+					if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+						echo "<li class=\"nav-item mx-2\">
+									<a href=\"login.php\"><button class=\"btn btn-warning\" type=\"submit\">Login</button></a>
+								</li>
+								<li class=\"nav-item mx-2\">
+									<a href=\"signup.php\"><button class=\"btn btn-outline-warning\" type=\"submit\">Signup</button></a>
+								</li>
+								";
+					} else {
+						echo "<li class=\"nav-item mx-2\">
+						<a class=\"nav-link\" href=\"add.php\">Add a blog</a>
 					</li>
-					<li class="nav-item mx-2">
-						<a href="login.php"><button class="btn btn-warning" type="submit">Login</button></a>
+
+					<li class=\"nav-item mx-2\">
+						<a class=\"nav-link\" href=\"profile.php\">Profile</a>
 					</li>
+					<li class=\"nav-item mx-2\">
+						<a href=\"logout.php\"><button class=\"btn btn-warning\" type=\"submit\">Logout</button></a>
+					</li>
+					";
+					}
+					?>
+
+
 				</ul>
 
 			</div>
@@ -51,9 +70,14 @@
 
 
 	<?php
+
+	if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+		header("location: login.php");
+	}
+
 	if (isset($_POST['submit'])) {
 		// Get editor content
-		$author = "DK-2021";
+		$author = $_SESSION["uname"];
 		$editorContent = $_POST['content'];
 		$title = $_POST['title'];
 		$tag = $_POST['tag'];

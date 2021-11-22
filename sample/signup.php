@@ -91,6 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpg" href="icon.jpg">
     <title>Signup</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -161,35 +162,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     ?>
 
 
-    <!-- <section>
-        <div class="container-form">
-            <div class="user signupBx">
-                <div class="formBx">
-                    <form action="signup.php" method="post">
-                        <h2>Create an account</h2>
-                        <input type="text" name="uname" placeholder="Username" />
-                        <?php echo "<p>" . $username_err . "</p>" ?>
-                        <input type="email" name="email" placeholder="Email Address" />
-                        <?php echo "<p>" . $email_err . "</p>" ?>
-                        <input type="password" name="password" placeholder="Create Password" />
-                        <?php echo "<p>" . $password_err . "</p>" ?>
-                        <input type="password" name="cpassword" placeholder="Confirm Password" />
-                        <?php echo "<p>" . $confirm_password_err . "</p>" ?>
-                        <input type="submit" name="signup" value="Signup" />
-
-                        <p class="signup">
-                            Already have an account ?
-                            <a href="login.php">Sign in.</a>
-                        </p>
-                    </form>
-                </div>
-                <div class="imgBx"><img src="accounts2.png" alt="" /></div>
-            </div>
-        </div>
-    </section> -->
-
-    <div class="container border" style="margin: auto; margin-top: 5%; margin-bottom: 2%; padding: 1.75%; border-radius: 16px; width: 40%">
+    <div class="container border" style="background-color: white; margin: auto; margin-top: 5%; margin-bottom: 2%; padding: 1.75%; border-radius: 16px; width: 35%">
         <h2 class="text-center">Sign Up</h2>
+        <br>
         <form method="POST" action="signup.php">
             <div class="form-group">
                 <label for="title">Username</label>
@@ -217,7 +192,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
             <br>
             <br>
-            <button type="submit" class="btn btn-outline-success" name="signup">Sign Up</button>
+            <div class="d-grid gap-2 col-3 mx-auto">
+                <button type="submit" class="btn btn-outline-success" name="signup">Sign Up</button>
+            </div>
         </form>
 
     </div>

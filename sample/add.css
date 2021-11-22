@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&family=Josefin+Sans&display=swap');
+
+.navbar {
+    font-family: 'Comfortaa' !important;
+}
+
+h2 {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+body {
+    background-color: whitesmoke;
+}
+
+.card {
+    transition: all 0.2s ease;
+    cursor: pointer
+}
+
+.card:hover {
+    box-shadow: 5px 6px 6px 2px #e9ecef;
+    transform: scale(1.025)
+}

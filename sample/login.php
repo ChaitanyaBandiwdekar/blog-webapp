@@ -59,13 +59,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpg" href="icon.jpg">
     <title>Login</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="add.css" />
 
 
 </head>
@@ -120,8 +121,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </div>
     </nav>
 
-    <div class="container border" style="margin: auto; margin-top: 5%; margin-bottom: 2%; padding: 1.75%; border-radius: 16px; width: 40%">
+    <div class="container border" style="background-color: white; margin: auto; margin-top: 5%; margin-bottom: 2%; padding: 2%; border-radius: 16px; width: 35%">
+
         <h2 class="text-center">Login</h2>
+
+        <br>
         <form method="POST" action="login.php">
             <div class="form-group">
                 <label for="title">Username</label>
@@ -135,7 +139,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
             <br>
             <br>
-            <button type="submit" class="btn btn-outline-success" name="login">Login</button>
+
+            <div class="d-grid gap-2 col-3 mx-auto">
+                <button type="submit" class="btn btn-outline-success text-center" name="login">Login</button>
+            </div>
         </form>
 
     </div>

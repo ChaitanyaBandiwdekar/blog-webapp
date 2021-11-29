@@ -33,7 +33,7 @@
 						<a class="nav-link active" aria-current="page" href="index.php">Home</a>
 					</li>
 					<li class="nav-item mx-2">
-						<a class="nav-link" href="#">About Us</a>
+						<a class="nav-link" href="aboutus.php">About Us</a>
 					</li>
 					<?php
 

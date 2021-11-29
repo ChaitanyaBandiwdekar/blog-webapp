@@ -70,10 +70,10 @@ if (isset($_GET['delete'])) {
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item mx-2">
-                        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                        <a class="nav-link" aria-current="page" href="index.php">Home</a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link" href="#">About Us</a>
+                        <a class="nav-link" href="aboutus.php">About Us</a>
                     </li>
                     <?php
 
@@ -93,7 +93,7 @@ if (isset($_GET['delete'])) {
 					</li>
 
 					<li class=\"nav-item mx-2\">
-						<a class=\"nav-link\" href=\"profile.php\">Profile</a>
+						<a class=\"nav-link active\" href=\"profile.php\">Profile</a>
 					</li>
 					<li class=\"nav-item mx-2\">
 						<a href=\"logout.php\"><button class=\"btn btn-warning\" type=\"submit\">Logout</button></a>

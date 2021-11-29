@@ -29,10 +29,10 @@
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 					<li class="nav-item mx-2">
-						<a class="nav-link active" aria-current="page" href="index.php">Home</a>
+						<a class="nav-link" aria-current="page" href="index.php">Home</a>
 					</li>
 					<li class="nav-item mx-2">
-						<a class="nav-link" href="#">About Us</a>
+						<a class="nav-link" href="aboutus.php">About Us</a>
 					</li>
 					<?php
 
@@ -48,7 +48,7 @@
 								";
 					} else {
 						echo "<li class=\"nav-item mx-2\">
-						<a class=\"nav-link\" href=\"add.php\">Add a blog</a>
+						<a class=\"nav-link active\" href=\"add.php\">Add a blog</a>
 					</li>
 
 					<li class=\"nav-item mx-2\">

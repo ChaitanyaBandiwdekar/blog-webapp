@@ -1,6 +1,5 @@
 <?php
 
-// check if the user is already logged in
 if (isset($_SESSION['uname'])) {
     header("location: profile.php");
     exit;
@@ -10,10 +9,10 @@ require_once "config.php";
 $username = $password = "";
 $err = "";
 
-// if request method is post
+
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (empty(trim($_POST['uname'])) || empty(trim($_POST['password']))) {
-        $err = "Please enter username + password";
+        $err = "Please enter username / password";
     } else {
         $username = trim($_POST['uname']);
         $password = trim($_POST['password']);
@@ -34,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password);
                 if (mysqli_stmt_fetch($stmt)) {
                     if (password_verify($password, $hashed_password)) {
-                        // this means the password is corrct. Allow user to login
+                        // this means the password is correct. Allow user to login
                         session_start();
                         $_SESSION["uname"] = $username;
                         $_SESSION["id"] = $id;
@@ -42,8 +41,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                         //Redirect user to welcome page
                         header("location: profile.php");
+                    } else {
+                        $err = "Invalid credentials! Please try again";
                     }
                 }
+            } else {
+                $err = "Invalid credentials! Please try again";
             }
         }
     }
@@ -89,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     </li>
 
                     <li class="nav-item mx-2">
-                        <a class="nav-link" href="#">About Us</a>
+                        <a class="nav-link" href="aboutus.php">About Us</a>
                     </li>
                     <?php
 
@@ -126,6 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <h2 class="text-center">Login</h2>
 
         <br>
+        <?php echo "<small style=\"color: red;\">" . $err . "</small>" ?>
         <form method="POST" action="login.php">
             <div class="form-group">
                 <label for="title">Username</label>
@@ -138,12 +142,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             </div>
 
             <br>
+            <p class="text-center">Don't have an account? <a href="signup.php">Signup here</a></p>
             <br>
 
             <div class="d-grid gap-2 col-3 mx-auto">
                 <button type="submit" class="btn btn-outline-success text-center" name="login">Login</button>
             </div>
         </form>
+
 
     </div>
 

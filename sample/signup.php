@@ -60,7 +60,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 
 
-    // If there were no errors, go ahead and insert into the database
     if (empty($username_err) && empty($email_err) && empty($password_err) && empty($confirm_password_err)) {
         $sql = "INSERT INTO user (uname, email, password) VALUES (?, ?, ?)";
         $stmt = mysqli_prepare($conn, $sql);
@@ -72,7 +71,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $param_email = $email;
             $param_password = password_hash($password, PASSWORD_DEFAULT);
 
-            // Try to execute the query
             if (mysqli_stmt_execute($stmt)) {
                 $success = true;
             }
@@ -120,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     </li>
 
                     <li class="nav-item mx-2">
-                        <a class="nav-link" href="#">About Us</a>
+                        <a class="nav-link" href="aboutus.php">About Us</a>
                     </li>
                     <?php
 
@@ -191,9 +189,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             </div>
 
             <br>
+            <p class="text-center">Already have an account? <a href="login.php">Login here</a></p>
             <br>
+
             <div class="d-grid gap-2 col-3 mx-auto">
-                <button type="submit" class="btn btn-outline-success" name="signup">Sign Up</button>
+                <button type="submit" class="btn btn-outline-primary" name="signup">Sign Up</button>
             </div>
         </form>
 

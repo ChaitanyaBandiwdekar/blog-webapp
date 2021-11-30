@@ -12,7 +12,10 @@
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 	<link rel="stylesheet" href="add.css">
+	<link rel="stylesheet" href="search.css">
 
 </head>
 
@@ -72,7 +75,15 @@
 
 	<br>
 	<h2 class="text-center">Latest Blogs</h2>
+	<div class="container">
+		<div class="row height d-flex justify-content-center align-items-center">
+			<div class="col-md-8">
+				<div class="search"> <i class="fa fa-search"></i> <input onkeyup="myFunction()" id="myInput" type="text" class="form-control" placeholder="Search for blog"> <button class="btn btn-warning">Search</button> </div>
+			</div>
+		</div>
+	</div>
 	<div class="container border" style="background-color: ghostwhite; margin: auto; margin-top: 1%; margin-bottom: 2%; padding: 1.75%; border-radius: 16px">
+
 		<div class="row row-cols-1 row-cols-md-3 g-4">
 
 			<?php
@@ -90,7 +101,7 @@
 			while ($row = mysqli_fetch_assoc($result)) {
 				$sno = $sno + 1;
 				echo "<div class=\"col\">
-						<div class=\"card h-100\" style=\"border-radius: 3%\">
+						<div name=\"blog-card\" class=\"card h-100\" style=\"border-radius: 3%\">
 							<img src=\"" . $row['img'] . "\" class=\"card-img-top\" style=\"width: 100%; height: 15vw; object-fit: cover; border-radius: 8px\">
 							<div class=\"card-body\">
 							<a href=\"blog.php?id=" . $row['id'] . "\" class=\"card-title fs-5 text-decoration-none stretched-link\" style=\"color: black;\">" . $row['title'] . "</a>
@@ -105,6 +116,26 @@
 
 		</div>
 	</div>
+
+	<script>
+		function myFunction() {
+			var input, filtered, ul, li, a, i, txtValue;
+			input = document.getElementById("myInput");
+			filtered = input.value.toUpperCase();
+			// ul = document.getElementsByName("blog-card");
+			// li = ul.getElementsByTagName("div");
+			li = document.getElementsByName("blog-card");
+			for (i = 0; i < li.length; i++) {
+				a = li[i].getElementsByTagName("a")[0];
+				txtValue = a.textContent || a.innerText;
+				if (txtValue.toUpperCase().indexOf(filtered) > -1) {
+					li[i].parentElement.style.display = "";
+				} else {
+					li[i].parentElement.style.display = "none";
+				}
+			}
+		}
+	</script>
 
 </body>
 

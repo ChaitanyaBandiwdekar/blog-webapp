@@ -38,6 +38,7 @@
                         <a class="nav-link  active" href="aboutus.php">About Us</a>
                     </li>
                     <?php
+                    session_start();
 
                     if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         echo "<li class=\"nav-item mx-2\">
@@ -70,7 +71,7 @@
     <div class="container2">
         <div class="card">
             <div class="img-bx">
-                <img src="https://i.postimg.cc/dQ7zWbS5/img-4.jpg" alt="img" />
+                <img src="static/chaitanya.jpg" alt="img" />
             </div>
             <br>
             <div class="content">
@@ -95,7 +96,7 @@
         </div>
         <div class="card">
             <div class="img-bx">
-                <img src="https://i.postimg.cc/dQ7zWbS5/img-4.jpg" alt="img" />
+                <img src="static/dhruv.jpeg" alt="img" />
             </div>
             <br>
             <div class="content">

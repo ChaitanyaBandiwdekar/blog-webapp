@@ -1,8 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&family=Josefin+Sans&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
+
+
+.navbar {
+    font-family: 'Comfortaa' !important;
+}
 
   .container2{
       display: flex;
